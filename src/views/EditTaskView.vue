@@ -1,8 +1,5 @@
 <template>
-  <SuccessDialog
-    :successAlert="successAlert"
-    successMessage="Updated succesfully"
-  />
+  <SuccessDialog :successAlert="successAlert" successMessage="Updated succesfully" />
   <TaskDetail :task="relatedTask" @edit="editTask" />
 </template>
 
@@ -26,7 +23,7 @@ export default {
         this.taskId &&
         todosStore.todos.filter((item) => item.id == this.taskId)
         ? todosStore.todos.find((item) => item.id == this.taskId)
-        : { id: 5 };
+        : null
     },
   },
   methods: {

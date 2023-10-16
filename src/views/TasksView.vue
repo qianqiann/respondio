@@ -29,10 +29,7 @@
         </div>
         <div>
           <label>Description</label>
-          <v-text-field
-            v-model="description"
-            label="Description"
-          ></v-text-field>
+          <v-text-field v-model="description" label="Description"></v-text-field>
         </div>
         <div>
           <label>From Date</label>
@@ -50,65 +47,35 @@
       <div class="sort">
         <label>Sort By</label>
         <div class="sort_fields">
-          <v-select
-            v-model="sortField"
-            label="Sort By Fields"
-            :items="sortFields"
-            item-title="value"
-            item-value="id"
-          ></v-select>
-          <v-select
-            v-model="sortOrder"
-            label="Order"
-            :items="['Ascending', 'Descending']"
-          ></v-select>
+          <v-select v-model="sortField" label="Sort By Fields" :items="sortFields" item-title="value"
+            item-value="id"></v-select>
+          <v-select v-model="sortOrder" label="Order" :items="['Ascending', 'Descending']"></v-select>
         </div>
       </div>
     </div>
     <!--Task List-->
     <div class="tasks">
-      <div
-        class="task_box"
-        @drop="onDrop($event, 'pending')"
-        @dragover.prevent
-        @dragenter.prevent
-      >
+      <div class="task_box" @drop="onDrop($event, 'pending')" @dragover.prevent @dragenter.prevent>
         <!--Title-->
         <div class="title">
           {{ `Pending ${pendingArray.length}/${showList.length}` }}
         </div>
-        <div id="pending">
-          <div
-            v-if="pendingArray.length > 0"
-            v-for="item in pendingArray"
-            :key="item"
-            class="task_main"
-            draggable="true"
-            @dragstart="startDrag($event, item)"
-          >
+        <div id="pending" v-if="pendingArray.length > 0">
+          <div v-for="item in pendingArray" :key="item" class="task_main" draggable="true"
+            @dragstart="startDrag($event, item)">
             <div draggable="true" @dragstart="startDrag($event, item)">
               <TaskCard :task="item" />
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="task_box"
-        @drop="onDrop($event, 'processing')"
-        @dragover.prevent
-        @dragenter.prevent
-      >
+      <div class="task_box" @drop="onDrop($event, 'processing')" @dragover.prevent @dragenter.prevent>
         <!--Title-->
         <div class="title">
           {{ `Processing ${processingArray.length || 0}/${showList.length}` }}
         </div>
-        <div id="processing">
-          <div
-            v-if="processingArray.length > 0"
-            v-for="item in processingArray"
-            v-bind:key="item.id"
-            class="task_main"
-          >
+        <div id="processing" v-if="processingArray.length > 0">
+          <div v-for="item in processingArray" v-bind:key="item.id" class="task_main">
             <div draggable="true" @dragstart="startDrag($event, item)">
               <TaskCard draggable :task="item" />
             </div>
@@ -116,23 +83,13 @@
         </div>
       </div>
 
-      <div
-        class="task_box"
-        @drop="onDrop($event, 'done')"
-        @dragover.prevent
-        @dragenter.prevent
-      >
+      <div class="task_box" @drop="onDrop($event, 'done')" @dragover.prevent @dragenter.prevent>
         <!--Title-->
         <div class="title">
           {{ `Done ${doneArray.length || 0}/${showList.length}` }}
         </div>
-        <div id="done">
-          <div
-            v-if="doneArray.length > 0"
-            v-for="item in doneArray"
-            :key="item"
-            class="task_main"
-          >
+        <div id="done" v-if="doneArray.length > 0">
+          <div v-for="item in doneArray" :key="item" class="task_main">
             <div draggable="true" @dragstart="startDrag($event, item)">
               <TaskCard draggable :task="item" />
             </div>
@@ -274,10 +231,10 @@ export default {
             ? this.sortField == 'attachmentsPreview'
               ? a[this.sortField].length - b[this.sortField].length
               : a[this.sortField] - b[this.sortField] ||
-                a[this.sortField].localeCompare(b[this.sortField])
+              a[this.sortField].localeCompare(b[this.sortField])
             : this.sortField == 'attachmentsPreview'
-            ? b[this.sortField].length - a[this.sortField].length
-            : b[this.sortField] - a[this.sortField] ||
+              ? b[this.sortField].length - a[this.sortField].length
+              : b[this.sortField] - a[this.sortField] ||
               b[this.sortField].localeCompare(a[this.sortField])
         );
         this.showList = [];
@@ -336,6 +293,7 @@ export default {
 
   grid-gap: 10px;
 }
+
 .task_box {
   width: 100%;
 

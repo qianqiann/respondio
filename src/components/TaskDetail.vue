@@ -3,45 +3,22 @@
     <div class="title">{{ !task ? 'Add Task' : 'Update Task' }}</div>
     <v-form ref="form" @submit.prevent>
       <label>Title</label>
-      <v-text-field
-        v-model="title"
-        required
-        :rules="titleRule"
-        label="Title"
-      ></v-text-field>
+      <v-text-field v-model="title" required :rules="titleRule" label="Title"></v-text-field>
 
       <label>Description</label>
       <v-textarea v-model="description" label="Description"></v-textarea>
 
       <div>
         <label>Estimated Time</label>
-        <Datepicker
-          :clearable="false"
-          class="datepick"
-          v-model="estimatedTime"
-          required
-          :format="dateFormat"
-        />
+        <Datepicker :clearable="false" class="datepick" v-model="estimatedTime" required :format="dateFormat" />
       </div>
       <label>Status</label>
-      <v-select
-        v-model="status"
-        :items="statusList"
-        item-title="name"
-        item-value="id"
-        label="Select"
-        :rules="statusRule"
-      ></v-select>
+      <v-select v-model="status" :items="statusList" item-title="name" item-value="id" label="Select"
+        :rules="statusRule"></v-select>
 
       <label>Attachments</label>
-      <v-file-input
-        @change="handleFileUpload"
-        accept="image/*"
-        multiple
-        v-model="attachments"
-        :rules="attachmentsRule"
-        label="File input"
-      ></v-file-input>
+      <v-file-input @change="handleFileUpload" accept="image/*" multiple v-model="attachments" :rules="attachmentsRule"
+        label="File input"></v-file-input>
 
       <div class="images">
         <div v-for="(i, index) in showAttachments" v-bind:key="i">
@@ -57,7 +34,7 @@
         <span class="tooltip">Click on Chip to Remove</span>
         <div class="chip_main">
           <v-chip-group>
-            <v-chip v-for="(item, index) in labels">
+            <v-chip v-for="(item) in labels" v-bind:key="item">
               <div @click="removeChip(item)">
                 {{ item }}
               </div>
@@ -74,8 +51,7 @@
 
       <div class="field_buttons">
         <div>
-          <v-btn class="me-4" type="submit" @click="submit"
-            >{{ task ? 'Update Task' : 'Add New Task' }}
+          <v-btn class="me-4" type="submit" @click="submit">{{ task ? 'Update Task' : 'Add New Task' }}
           </v-btn>
 
           <v-btn @click="handleReset"> Clear </v-btn>
@@ -293,6 +269,7 @@ label {
   display: flex;
   flex-direction: row;
 }
+
 .tooltip {
   margin-left: 10px;
   font-size: 10px;
